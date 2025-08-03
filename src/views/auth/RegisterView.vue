@@ -26,7 +26,7 @@ const { mobile } = useDisplay()
             <v-card-text class="bg-surface-light pt-4">
               <RegisterForm></RegisterForm>
               <v-divider class="my-5"></v-divider>
-              <h5 class="text-center">
+              <h5 class="text-center font-weight-bold">
                 Already have an account?
                 <RouterLink class="text-primary" to="/">Click here to Login</RouterLink>
               </h5>
