@@ -9,13 +9,9 @@ function onClick() {
 </script>
 
 <template>
-  <v-responsive class="border rounded">
+  <v-responsive class="rounded">
     <v-app :theme="theme">
-      <v-app-bar
-        class="px-3"
-        :color="theme === 'light' ? 'grey-lighten-1' : 'grey-darken-3'"
-        border
-      >
+      <v-app-bar class="px-3" :color="theme === 'light' ? 'grey-lighten-1' : 'grey-darken-3'">
         <v-spacer></v-spacer>
 
         <v-btn
@@ -32,7 +28,10 @@ function onClick() {
         </v-container>
       </v-main>
 
-      <v-footer :color="theme === 'light' ? 'grey-lighten-1' : 'grey-darken-3'" border app>
+      <v-footer
+        class="mt-10 font-weight-bold"
+        :color="theme === 'light' ? 'grey-lighten-1' : 'grey-darken-3'"
+      >
         2025 - Sherlix Meatshop</v-footer
       >
     </v-app>
