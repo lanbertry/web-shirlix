@@ -10,35 +10,40 @@ const { mobile } = useDisplay()
 <template>
   <AppLayout
     ><template #content>
-      <v-row>
-        <v-col cols="12" md="6" class="mx-auto pt-16">
-          <v-card class="mx-auto" elevation="24">
-            <v-card-title class="text-center">
-              <v-img
-                class="mx-auto"
-                src="/images/logo-favicon.png"
-                :width="mobile ? '75%' : '25%'"
-                rounded="circle"
-              ></v-img>
-              <h3 class="font-weight-black text-center">Shirlix Meatshop</h3>
-              <p>Login Form</p>
-            </v-card-title>
+      <v-container fluid>
+        <v-row>
+          <v-col cols="12" md="8" class="bg-surface-light h-screen" v-if="!mobile"></v-col>
+          <v-col cols="12" md="4" :class="mobile ? '' : 'pt-16'">
+            <v-card class="mx-auto" elevation="0" max-width="600">
+              <v-card-title class="text-center">
+                <v-img
+                  class="mx-auto"
+                  src="/images/logo-favicon.png"
+                  :width="mobile ? '75%' : '25%'"
+                  rounded="circle"
+                ></v-img>
+                <h3 class="font-weight-black text-center">Shirlix Meatshop</h3>
+                <p>Login Form</p>
+              </v-card-title>
 
-            <v-card-text class="bg-surface-light pt-4">
-              <v-divider class="my-5"></v-divider>
+              <v-card-text class="pt-4">
+                <v-divider class="my-5"></v-divider>
 
-              <LoginForm></LoginForm>
+                <LoginForm></LoginForm>
 
-              <v-divider class="my-5"></v-divider>
+                <v-divider class="my-5"></v-divider>
 
-              <h5 class="text-center font-weight-bold">
-                Don't have an account?
-                <RouterLink class="text-primary" to="/register">Click here to Register</RouterLink>
-              </h5>
-            </v-card-text>
-          </v-card>
-        </v-col>
-      </v-row></template
+                <h5 class="text-center font-weight-bold">
+                  Don't have an account?
+                  <RouterLink class="text-primary" to="/register"
+                    >Click here to Register</RouterLink
+                  >
+                </h5>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container></template
     ></AppLayout
   >
 </template>
