@@ -24,14 +24,13 @@ function onClick() {
       </v-app-bar>
 
       <v-main>
-        <v-container>
-          <slot name="content"></slot>
-        </v-container>
+        <slot name="content"></slot>
       </v-main>
 
       <v-footer
         class="mt-10 font-weight-bold"
         :color="theme === 'light' ? 'grey-lighten-1' : 'grey-darken-3'"
+        app
       >
         2025 - Sherlix Meatshop</v-footer
       >

@@ -10,9 +10,10 @@ const { mobile } = useDisplay()
   <AppLayout>
     <template #content>
       <v-row>
-        <v-col cols="12" md="6" class="mx-auto pt-16">
-          <v-card class="mx-auto" elevation="24">
-            <v-card-title class="text-center">
+        <v-col cols="12" md="8" class="bg-surface-light h-screen" v-if="!mobile"></v-col>
+        <v-col cols="12" md="4" :class="mobile ? '' : 'my-auto'">
+          <v-card class="mx-auto" elevation="0">
+            <v-card-title class="text-center mb-5">
               <v-img
                 class="mx-auto"
                 src="/images/logo-favicon.png"
@@ -22,8 +23,8 @@ const { mobile } = useDisplay()
               <h3 class="font-weight-black text-center">Shirlix Meatshop</h3>
               <p>Register Form</p>
             </v-card-title>
-
-            <v-card-text class="bg-surface-light pt-4">
+            <v-divider class=""></v-divider>
+            <v-card-text class="pt-4">
               <RegisterForm></RegisterForm>
               <v-divider class="my-5"></v-divider>
               <h5 class="text-center font-weight-bold">
