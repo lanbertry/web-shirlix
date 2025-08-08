@@ -1,5 +1,4 @@
 <script setup>
-import { formActionDefault, supabase } from '@/utils/supabase'
 import {
   requiredValidator,
   emailValidator,
@@ -8,6 +7,10 @@ import {
 } from '@/utils/validator'
 import { ref } from 'vue'
 import AlertNotification from '@/components/common/AlertNotification.vue'
+import { formActionDefault, supabase } from '@/utils/supabase'
+import { useRouter } from 'vue-router'
+
+const router = useRouter()
 
 const visible = ref(false)
 const refVForm = ref()
@@ -39,6 +42,7 @@ const onSubmit = async () => {
       data: {
         firstname: formData.value.firstname,
         lastname: formData.value.lastname,
+        is_admin: false,
       },
     },
   })
@@ -48,11 +52,11 @@ const onSubmit = async () => {
     formAction.value.formErrorMessage = error.message
     formAction.value.formStatus = error.status
   } else if (data) {
-    console.log(data)
+    // console.log(data)
     formAction.value.formSuccessMessage = 'Successfully Registered an Account.'
-    refVForm.value.reset()
+    router.replace('/dashboard')
   }
-
+  refVForm.value?.reset()
   formAction.value.formProcess = false
 }
 
