@@ -27,7 +27,7 @@ const onFormSubmit = () => {
 </script>
 
 <template>
-  <v-form fast-fail @submit.prevent="onFormSubmit" ref="refVForm">
+  <v-form @submit.prevent="onFormSubmit" ref="refVForm">
     <v-text-field
       v-model="formData.email"
       prepend-inner-icon="mdi-email-outline"
