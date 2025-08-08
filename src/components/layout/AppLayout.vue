@@ -17,6 +17,7 @@ function onClick() {
 
         <v-btn
           :icon="theme === 'light' ? 'mdi-weather-sunny' : 'mdi-weather-night'"
+          color="primary"
           slim
           variant="elevated"
           @click="onClick"
