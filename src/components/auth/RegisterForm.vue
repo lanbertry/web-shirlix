@@ -1,15 +1,16 @@
 <script setup>
-import { ref } from 'vue'
-
-const visible = ref(false)
-const refVForm = ref()
-
+import { formActionDefault, supabase } from '@/utils/supabase'
 import {
   requiredValidator,
   emailValidator,
   passwordValidator,
   confirmedValidator,
 } from '@/utils/validator'
+import { ref } from 'vue'
+import AlertNotification from '@/components/common/AlertNotification.vue'
+
+const visible = ref(false)
+const refVForm = ref()
 
 const formDataDefault = {
   firstname: '',
@@ -19,12 +20,40 @@ const formDataDefault = {
   password_confirmation: '',
 }
 
+const formAction = ref({
+  ...formActionDefault,
+})
+
 const formData = ref({
   ...formDataDefault,
 })
 
-const onSubmit = () => {
-  alert(formData.value.email)
+const onSubmit = async () => {
+  formAction.value = { ...formActionDefault }
+  formAction.value.formProcess = true
+
+  const { data, error } = await supabase.auth.signUp({
+    email: formData.value.email,
+    password: formData.value.password,
+    options: {
+      data: {
+        firstname: formData.value.firstname,
+        lastname: formData.value.lastname,
+      },
+    },
+  })
+
+  if (error) {
+    console.log(error)
+    formAction.value.formErrorMessage = error.message
+    formAction.value.formStatus = error.status
+  } else if (data) {
+    console.log(data)
+    formAction.value.formSuccessMessage = 'Successfully Registered an Account.'
+    refVForm.value.reset()
+  }
+
+  formAction.value.formProcess = false
 }
 
 const onFormSubmit = () => {
@@ -35,6 +64,11 @@ const onFormSubmit = () => {
 </script>
 
 <template>
+  <AlertNotification
+    :form-success-message="formAction.formSuccessMessage"
+    :form-error-message="formAction.formErrorMessage"
+  ></AlertNotification>
+
   <v-form @submit.prevent="onFormSubmit" ref="refVForm">
     <v-row>
       <v-col cols="6">
@@ -92,7 +126,14 @@ const onFormSubmit = () => {
       ></v-col>
     </v-row>
 
-    <v-btn class="mt-2" color="primary" type="submit" block prepend-icon="mdi-account-plus"
+    <v-btn
+      class="mt-2"
+      color="primary"
+      type="submit"
+      block
+      prepend-icon="mdi-account-plus"
+      :disabled="formAction.formProcess"
+      :loading="formAction.formProcess"
       >Register</v-btn
     >
   </v-form>
