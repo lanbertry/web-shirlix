@@ -24,3 +24,17 @@ export const isAuthenticated = async () => {
 
   return !!data.session
 }
+
+//Retrieve user information and set it in userData
+export const getUserInformation = async () => {
+  const { data, error } = await supabase.auth.getUser()
+
+  if (error || !data?.user) {
+    return { email: '', firstname: '', lastname: '', is_admin: false }
+  }
+
+  const { user } = data
+  const { user_metadata = {}, email = '' } = user
+
+  return { email, is_admin: false, ...user_metadata }
+}

@@ -54,7 +54,7 @@ const onSubmit = async () => {
   } else if (data) {
     // console.log(data)
     formAction.value.formSuccessMessage = 'Successfully Registered an Account.'
-    router.replace('/dashboard')
+    router.replace('/system/dashboard')
   }
   refVForm.value?.reset()
   formAction.value.formProcess = false
@@ -73,7 +73,7 @@ const onFormSubmit = () => {
     :form-error-message="formAction.formErrorMessage"
   ></AlertNotification>
 
-  <v-form @submit.prevent="onFormSubmit" ref="refVForm">
+  <v-form class="mt-5" @submit.prevent="onFormSubmit" ref="refVForm">
     <v-row>
       <v-col cols="6">
         <v-text-field
